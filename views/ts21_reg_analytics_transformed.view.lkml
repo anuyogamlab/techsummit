@@ -11,7 +11,7 @@ view: ts21_reg_analytics_transformed {
     type: string
     map_layer_name: countries
     sql: ${TABLE}.country ;;
-    drill_fields: [city]
+    drill_fields: [state, city]
   }
 
   dimension: event {
