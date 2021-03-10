@@ -83,7 +83,7 @@ view: ts21_reg_analytics_transformed {
     sql: ${TABLE}.sessionId ;;
   }
 
-  measure: ldapcount {
+  measure: usercount {
     type: count_distinct
     sql: ${TABLE}.ldap ;;
   }
