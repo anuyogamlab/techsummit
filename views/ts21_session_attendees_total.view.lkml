@@ -64,6 +64,16 @@ view: ts21_session_attendees_total {
     drill_fields: [id]
   }
 
+  measure: attendees_recorded {
+    type: sum
+    sql: ${recording_count} ;;
+  }
+
+  measure: attendees_live {
+    type: sum
+    sql: ${livestream_attendance} ;;
+  }
+
   measure: attendees_sum {
     type: sum
     sql: ${total_attendance} ;;
