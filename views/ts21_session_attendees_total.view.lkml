@@ -14,6 +14,14 @@ view: ts21_session_attendees_total {
     sql: ${TABLE}.Date___Time ;;
   }
 
+  dimension: event_date {
+
+    type: date
+
+    sql: ${date___time};;
+
+  }
+
   dimension: duration {
     type: number
     sql: ${TABLE}.Duration ;;
