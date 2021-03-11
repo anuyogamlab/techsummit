@@ -77,6 +77,7 @@ view: ts21_session_attendees_total {
   measure: attendees_sum {
     type: sum
     sql: ${total_attendance} ;;
+    drill_fields: [attendees_recorded,attendees_live]
   }
 
   measure: total_duration {
