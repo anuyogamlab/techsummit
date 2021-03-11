@@ -62,7 +62,7 @@ view: ts21_session_attendees_total {
 
   dimension: event_date {
     type: string
-    sql: SUBSTR(${TABLE}.Date___Time,0,11) ;;
+    sql: TRIM(SUBSTR(${TABLE}.Date___Time,0,11)) ;;
   }
 
   measure: count {
