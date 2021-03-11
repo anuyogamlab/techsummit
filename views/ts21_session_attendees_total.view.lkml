@@ -14,14 +14,6 @@ view: ts21_session_attendees_total {
     sql: ${TABLE}.Date___Time ;;
   }
 
-  dimension: event_date {
-
-    type: date
-
-    sql: ${date___time};;
-
-  }
-
   dimension: duration {
     type: number
     sql: ${TABLE}.Duration ;;
@@ -66,6 +58,11 @@ view: ts21_session_attendees_total {
     type: string
     sql: ${TABLE}.Track ;;
     drill_fields: [title]
+  }
+
+  dimension: event_date {
+    type: string
+    sql: SUBSTR(${TABLE}.Date___Time,0,11) ;;
   }
 
   measure: count {
