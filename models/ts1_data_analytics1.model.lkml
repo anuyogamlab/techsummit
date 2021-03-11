@@ -2,6 +2,7 @@ connection: "techsummit-fieldworks-bigquery-data"
 
 # include all the views
 include: "/views/**/*.view"
+include: "/*.dashboard"
 
 datagroup: ts1_data_analytics1_default_datagroup {
   # sql_trigger: SELECT MAX(id) FROM etl_log;;
