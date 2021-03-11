@@ -57,6 +57,7 @@ view: ts21_session_attendees_total {
   dimension: track {
     type: string
     sql: ${TABLE}.Track ;;
+    drill_fields: [title]
   }
 
   measure: count {
