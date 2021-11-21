@@ -15,12 +15,12 @@ Some fields are in nested JSON format.
 These are queries written in BQ to extract underlying data for analytics:
 https://github.com/anuyogamlab/techsummit/blob/master/BigQuery
 
-Following are the six Data Models built in Look ML. These have the facts and dimensions for the Looker report to present KPIs like number of attendees segmenting by tracks, geography etc.
-  Ts21_events_master
-  Ts21_reg_analytics
-  Ts21_reg_analytics_transformed
-  Ts21_session_attendees_actual
-  Ts21_session_attendees_total
-  Ts21_viewer_analytics
+Following are the six Data Models built in Look ML. These have the facts and dimensions for the Looker report to present KPIs like number of attendees segmenting by tracks, geography etc. <br />
+  Ts21_events_master <br />
+  Ts21_reg_analytics <br />
+  Ts21_reg_analytics_transformed <br />
+  Ts21_session_attendees_actual <br />
+  Ts21_session_attendees_total <br />
+  Ts21_viewer_analytics <br />
 
 You can find the models code here: https://github.com/anuyogamlab/techsummit
