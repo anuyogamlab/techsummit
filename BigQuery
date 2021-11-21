@@ -1,0 +1,72 @@
+## Event Engagement Analysis by Number of Clicks
+SELECT 
+  JSON_EXTRACT(metadata, "$.eventId") AS eventId, count(*) as clicks 
+FROM `fieldworks.ts21_dataset.ts21_reg_analytics` 
+  WHERE DATE(timestamp) > "2021-02-18" and event='calendar' group by eventId order by eventId asc 
+
+## Calculates Total Attendees
+SELECT
+    COALESCE(SUM(ts21_session_attendees_total.Total_Attendance ), 0) AS ts21_session_attendees_total_attendees_sum
+FROM `ts21_dataset.ts21_session_attendees_total`
+     AS ts21_session_attendees_total
+     
+## Calculates Number of Attendees by Track
+SELECT
+  `eventId` AS `eventId`,
+  COUNT(DISTINCT ldap) AS ldapcount
+FROM (
+  SELECT
+    JSON_EXTRACT_SCALAR(metadata,
+      "$.eventId") AS eventId,
+    ldap AS ldap
+  FROM
+    `fieldworks.ts21_dataset.ts21_reg_analytics`
+  WHERE
+    (DATE(timestamp) > "2021-02-18"
+      AND event='recording'))
+GROUP BY
+  `eventId`;
+
+## Device Useragents Count
+SELECT
+    ts21_reg_analytics_transformed.userAgent  AS ts21_reg_analytics_transformed_user_agent,
+    COUNT(DISTINCT ts21_reg_analytics_transformed.ldap ) AS ts21_reg_analytics_transformed_usercount
+FROM `ts21_dataset.ts21_reg_analytics_transformed`
+     AS ts21_reg_analytics_transformed
+GROUP BY
+    1
+ORDER BY
+    2 DESC
+    
+## Analysis by Geography
+    
+SELECT 
+  * except(geo),ST_X(geo) as longitude, ST_Y(geo) as latitude, 
+CASE 
+  WHEN event="calendar" THEN JSON_EXTRACT_SCALAR(metadata, "$.eventId") 
+  WHEN event="recording" THEN JSON_EXTRACT_SCALAR(metadata, "$.eventId")
+  WHEN event="slides" THEN JSON_EXTRACT_SCALAR(metadata, "$.eventId")
+  WHEN event="dory" THEN JSON_EXTRACT_SCALAR(metadata, "$.eventId")
+  WHEN event="login" THEN JSON_EXTRACT_SCALAR(metadata, "$.status")
+  ELSE metadata END as metadataextract 
+FROM 
+  `fieldworks.ts21_dataset.ts21_reg_analytics` WHERE DATE(timestamp) > "2021-02-18"
+  
+## Unique Logins by Session Ids
+SELECT 
+  distinct(metadata) 
+FROM
+  `fieldworks.ts21_dataset.ts21_reg_analytics` 
+where event="login" or event="loginRefresh"
+
+## Unique Sessions Count
+select 
+  count(distinct sessionId) 
+FROM `fieldworks.ts21_dataset.ts21_reg_analytics`
+
+# Events, Tracks Metadata by Event type
+select distinct metadata from `fieldworks.ts21_dataset.ts21_reg_analytics` WHERE DATE(timestamp) > "2021-02-18" and event="login"
+select distinct metadata from `fieldworks.ts21_dataset.ts21_reg_analytics` WHERE DATE(timestamp) > "2021-02-18" and event="slides"
+select distinct metadata from `fieldworks.ts21_dataset.ts21_reg_analytics` WHERE DATE(timestamp) > "2021-02-18" and event="dory"
+
+
